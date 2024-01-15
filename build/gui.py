@@ -41,7 +41,7 @@ def button_1_click():
     
     print(email)
     print(password)
-    messagebox.showinfo("Login", "Login successful")
+    messagebox.showinfo("Register", "register successful")
 
    
 

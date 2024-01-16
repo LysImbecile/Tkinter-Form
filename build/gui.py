@@ -2,7 +2,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
 import sqlite3
 
 ### Database ###
@@ -14,7 +14,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, email TEX
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\henri\OneDrive\Documentos\Vscode\Login_Tkinter\build\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -34,11 +34,18 @@ def on_button_click() :
     print("button_1 clicked");
     email = entry_1.get();
     password = entry_2.get();
+    if email == "" or password == "":
+        print("Please fill all fields");
+        messagebox.showinfo("Error", "Please fill all fields");
+        return;
     print(email);
     print(password);
     cur.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password));
     conn.commit();
+    messagebox.showinfo("Success", "Data inserted");
     print("Data inserted");
+    entry_1.delete(0, 'end');
+    entry_2.delete(0, 'end');
 
 canvas = Canvas(
     window,

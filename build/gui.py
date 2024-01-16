@@ -34,10 +34,23 @@ def on_button_click() :
     print("button_1 clicked");
     email = entry_1.get();
     password = entry_2.get();
-    if email == "" or password == "":
+    if email == "" or password == "" :
         print("Please fill all fields");
         messagebox.showinfo("Error", "Please fill all fields");
         return;
+
+    elif not email.endswith("@gmail.com") :
+        print("Please enter a valid email");
+        messagebox.showinfo("Error", "Please enter a valid email");
+        return;
+
+    elif len(password) < 8 :
+        print("Password must be at least 8 characters");
+        messagebox.showinfo("Error", "Password must be at least 8 characters");
+        return;
+
+    
+
     print(email);
     print(password);
     cur.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password));
